@@ -1,18 +1,18 @@
 <template>
   <div>
-    <p>固定列表实现：</p>
-    <div class="zoom" @scroll="handleScroll" ref="zoom">
-      <div class="mask" :style="{ height: listHeight }"></div>
-      <div class="list" :style="{ transform: transform }">
-        <div
-          class="li"
-          :style="{ height: height + 'px' }"
-          v-for="(item, i) of now"
+    <p>固定列表（10000）演示：</p>
+    <div class="root" ref="root" @scroll="scroll">
+      <div class="container" :style="{ height: totalHeight }"></div>
+      <ul class="content" :style="{ transform: getTransform }">
+        <li
+          class="item"
+          :style="{ height: height + 'px', lineHeight: height + 'px' }"
+          v-for="(item, i) of nowList"
           :key="i"
         >
           {{ item }}
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -30,53 +30,56 @@ export default {
     };
   },
   computed: {
-    listHeight() {
-      return this.list.length * this.height + "px";
+    totalHeight() {
+      return this.height * this.list.length + "px";
     },
-    now() {
+    nowList() {
       return this.list.slice(this.start, this.end);
     },
-    transform() {
-      return `translate3d(0px,${this.start * this.height}px,0px)`;
+    getTransform() {
+      return `translate3d(0,${this.start * this.height}px,0)`;
     }
   },
   mounted() {
-    this.upScroll();
+    this.scroll();
   },
   methods: {
-    upScroll(top = 0) {
-      // 计算总列数，可视宽度 / 每列宽度
-      const clientHeight = this.$refs.zoom.clientHeight;
-      const zoom = Math.ceil(clientHeight / this.height);
-      // 开始
-      const start = Math.floor(top / this.height);
-      // 结束
-      const end = start + zoom;
+    scroll() {
+      const dom = this.$refs.root;
+      const total = Math.ceil(dom.clientHeight / this.height);
+      const start = Math.floor(dom.scrollTop / this.height);
+      const end = start + total;
       this.start = start;
       this.end = end;
-    },
-    handleScroll() {
-      const top = this.$refs.zoom.scrollTop;
-      this.upScroll(top);
     }
   }
 };
 </script>
+
 <style lang="less" scoped>
-.zoom {
-  height: 400px;
+.root {
+  border: 1px solid #999;
+  list-style: none;
   overflow: auto;
+  height: 400px;
   position: relative;
-  .mask {
+  .container {
     position: absolute;
-    top: 0;
     left: 0;
+    top: 0;
     right: 0;
     z-index: -1;
   }
-  .list {
-    .mask();
+  .content {
+    .container();
     z-index: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .item {
+    border-bottom: 1px solid #ccc;
+    padding-left: 40px;
   }
 }
 </style>
