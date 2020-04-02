@@ -1,4 +1,6 @@
-# 后台常见问题总结 demo
+# 后台常见问题 demo 展示
+
+> https://bosens-china.github.io/Background-problem-demo/dist/
 
 演示了三种情况
 
@@ -18,6 +20,6 @@
         ├── loading                   全局loading管理
 ```
 
-
 ## 其他
+
 具体实现和思路可以我的博客[后台项目总结 ](https://github.com/bosens-China/blog/issues/56)

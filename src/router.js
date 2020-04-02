@@ -12,7 +12,7 @@ const roll = () => import(/* webpackChunkName: "fictitious-roll" */ "@/view/fict
 
 Vue.use(VueRouter);
 const router = new VueRouter({
-  mode: "history",
+  mode: process.env.NODE_ENV === "production" ? "hash" : "history",
   routes: [
     {
       path: "/fictitious/",
