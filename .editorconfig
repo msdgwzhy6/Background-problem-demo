@@ -1,0 +1,14 @@
+root = true
+[*.{js,jsx,ts,tsx,vue}]
+# 编码  
+charset = utf-8
+# 空格  
+indent_style = space
+# 缩进数量
+indent_size = 2
+# 删除尾随空格
+trim_trailing_whitespace = true
+# 文件最后插入一个空格
+insert_final_newline = true
+# 最大字符
+max_line_length = 100

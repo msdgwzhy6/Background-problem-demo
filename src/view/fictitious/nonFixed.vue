@@ -46,12 +46,8 @@ export default {
     totalHeight() {
       if (this.initialtotal >= 0) {
         const { top, height } =
-          this.pointer >= 0
-            ? this.getIndexOffset(this.pointer)
-            : { top: 0, height: 0 };
-        return `${top +
-          height +
-          (this.list.length - 1 - this.pointer) * this.initialHeight}px`;
+          this.pointer >= 0 ? this.getIndexOffset(this.pointer) : { top: 0, height: 0 };
+        return `${top + height + (this.list.length - 1 - this.pointer) * this.initialHeight}px`;
       }
       const { height } = this.list.reduce(function(x, y) {
         return {
@@ -61,10 +57,7 @@ export default {
       return height + "px";
     },
     nowList() {
-      return this.list.slice(
-        this.start,
-        Math.min(this.end + 1, this.list.length)
-      );
+      return this.list.slice(this.start, Math.min(this.end + 1, this.list.length));
     },
     getTransform() {
       return `translate3d(0,${this.getIndexOffset(this.start).top}px,0)`;

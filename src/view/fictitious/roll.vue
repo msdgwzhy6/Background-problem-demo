@@ -24,11 +24,7 @@ export default {
       const DISTANCE = 40;
       const h = target.scrollHeight - (target.clientHeight + target.scrollTop);
       if (h < DISTANCE) {
-        for (
-          let i = 0, j = this.list.length, l = this.list.length;
-          i < l;
-          i++
-        ) {
+        for (let i = 0, j = this.list.length, l = this.list.length; i < l; i++) {
           this.list.push(j + i);
         }
       }
